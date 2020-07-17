@@ -25,49 +25,105 @@ module trigger_test(
     
     localparam CHANNEL = 12;
     
-    typedef bit [9:0] trig_time [0:11];
-    typedef logic [12:0] trig_ampl0[0:11];
-    
-    logic clk;
-    bit [2:0] state_counter;
-    bit [11:0] CH_valid_time, CH_valid_amp;
+    typedef logic [0:11][9:0] trig_time ;
+    typedef logic [0:11][12:0] trig_ampl0;
+    logic [(12*10-1):0] v_trig_time_ch;
+    logic [(12*13-1):0] v_trig_amp_ch;
     trig_time trig_time_ch;
     trig_ampl0 trig_amp_ch;
-    bit [1:0] trig_time_out;
-    bit [1:0] trig_amp_out;
-    int fd;
-    int num[CHANNEL-1:0], amp[CHANNEL-1:0], tim[CHANNEL-1:0];
-    bit [CHANNEL-1:0]CH_time, CH_amp;
-    int i;
-    integer code;
-    string str;
-        
+    
+    logic clk;
+    logic [2:0] state_counter;
+    logic [1:0] trig_time_out;
+    logic [1:0] trig_amp_out;
+    logic [CHANNEL-1:0]CH_time, CH_amp;
+    
+    logic [1:0] tim_out[11:0];
+    logic [1:0] amp_out[11:0];
+    int count;
+
+    logic [1:0] tim_res[11:0];
+    logic [1:0] amp_res[11:0];
+
+    assign v_trig_time_ch = trig_time_ch;
+    assign v_trig_amp_ch = trig_amp_ch;
+    
     initial begin
-        fd = $fopen("sample.csv", "r");
-        foreach(num[i]) begin
-            code = $fgets(str,fd);
-            $sscanf(str,"%d,%b,%b,%d,%d",num[i],CH_amp[i],CH_time[i],amp[i],tim[i]);
-            $display("%d", str);
-        end  
         clk = 0;
         state_counter = 0;
-        forever begin
-        #5 clk = ~clk;
-        state_counter++;
-        end
-        # 50;
-        
+        read_sample(CH_amp,CH_time,trig_amp_ch,trig_time_ch);
+        # 120; 
+        read_results(tim_res,amp_res);
         $finish;
     end
     
-    trigger my_trigger(
+    //generate clk
+    always #5 clk = ~clk;
+    
+    //generate mt_counter
+    always @(posedge clk) state_counter++;
+    
+    //capture outputs
+    always @(posedge clk) begin
+        tim_out[count] = trig_time_out;
+        amp_out[count] = trig_amp_out;
+        count++;
+    end
+        
+    trigger_wrapper my_trigger(
     .clk320(clk),
     .mt_cou(state_counter),
     .CH_trigt(CH_time), 
     .CH_triga(CH_amp), 
-//    .CH_TIME_T(trig_time_ch),
-//    .CH_ampl0(trig_amp_ch),
+    .CH_TIME_T(trig_time_ch),
+    .CH_ampl0(trig_amp_ch),
     .tt(trig_time_out),
     .ta(trig_amp_out)
     );
+    
+    
+    task read_sample(output logic [CHANNEL-1:0]CH_amp, output logic [CHANNEL-1:0]CH_time, output [CHANNEL-1:0][12:0]amp, output [CHANNEL-1:0][9:0]tim);
+        string line;
+        integer code;
+        int num[CHANNEL-1:0];
+        int fd;
+
+        fd = $fopen("sample.csv", "r");
+        
+        // Check if the file has been opened
+        if (fd == 0) begin
+          $display ("ERROR: sample.csv not opened");
+          $finish;
+        end
+        
+        foreach(num[i]) begin
+            code = $fgets(line,fd);
+            $sscanf(line,"%d,%b,%b,%d,%d",num[i],CH_amp[i],CH_time[i],amp[i],tim[i]);
+            $display("%d", line);
+        end 
+//        $fclose("sample.csv");  
+    endtask
+    
+    task read_results(output logic [1:0] tim_res[11:0], output logic [1:0] amp_res[11:0]);
+    int fd;
+    int i;
+    integer code;
+    int num[CHANNEL-1:0];
+    string line;
+    
+    fd = $fopen("results.csv", "r");
+    
+    // Check if the file has been opened
+    if (fd == 0) begin
+      $display ("ERROR: sample.csv not opened");
+      $finish;
+    end
+    
+    foreach(num[i]) begin
+        code = $fgets(line,fd);
+        $sscanf(line,"%d,%d",tim_res[i], amp_res[i]);
+        $display("%d", line);
+    end 
+   
+    endtask
 endmodule
