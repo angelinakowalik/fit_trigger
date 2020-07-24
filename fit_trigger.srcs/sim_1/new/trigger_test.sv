@@ -51,12 +51,21 @@ module trigger_test(
     initial begin
         clk = 0;
         state_counter = 0;
+        count = 0;
         read_sample(CH_amp,CH_time,trig_amp_ch,trig_time_ch);
         # 120; 
         read_results(tim_res,amp_res);
+        write_to_file(tim_res,amp_res);
+        
+        foreach(tim_res[i]) begin
+            if(tim_res[i] == tim_out[i] && amp_res[i] == amp_out[i])
+                $display("Test PASSED");
+            else
+                $display("Test FAILED");
+        end
         $finish;
     end
-    
+   //sparametryzowac pmy 
     //generate clk
     always #5 clk = ~clk;
     
@@ -68,6 +77,8 @@ module trigger_test(
         tim_out[count] = trig_time_out;
         amp_out[count] = trig_amp_out;
         count++;
+        if(count == 12)
+            count = 0;
     end
         
     trigger_wrapper my_trigger(
@@ -102,7 +113,7 @@ module trigger_test(
             $display("%d", line);
         end 
 //        $fclose("sample.csv");  
-    endtask
+    endtask :read_sample
     
     task read_results(output logic [1:0] tim_res[11:0], output logic [1:0] amp_res[11:0]);
     int fd;
@@ -125,5 +136,16 @@ module trigger_test(
         $display("%d", line);
     end 
    
+    endtask :read_results
+    
+    task write_to_file(input logic [1:0] tim_res[11:0], input logic [1:0] amp_res[11:0]);
+        int num[CHANNEL-1:0];
+        int file;
+        file = $fopen ("outputs.txt", "w");
+        foreach(num[i]) begin
+            $fdisplay(file,"%d,%d",tim_res[i], amp_res[i]);
+        end 
+        $fclose(file);
     endtask
+    
 endmodule

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="trigger_test_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="pm12_pkg" />
+            <top_module name="trigger_test" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="173709678fs"></ZoomEndTime>
+      <Cursor1Time time="120000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="140"></NameColumnWidth>
+      <ValueColumnWidth column_width="88"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="16" />
+   <wvobject fp_name="/trigger_test/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/trigger_test/state_counter" type="array">
+      <obj_property name="ElementShortName">state_counter[2:0]</obj_property>
+      <obj_property name="ObjectShortName">state_counter[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/trigger_test/trig_time_ch" type="array">
+      <obj_property name="ElementShortName">trig_time_ch[0:11][9:0]</obj_property>
+      <obj_property name="ObjectShortName">trig_time_ch[0:11][9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/trigger_test/trig_amp_ch" type="array">
+      <obj_property name="ElementShortName">trig_amp_ch[0:11][12:0]</obj_property>
+      <obj_property name="ObjectShortName">trig_amp_ch[0:11][12:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/trigger_test/trig_time_out" type="array">
+      <obj_property name="ElementShortName">trig_time_out[1:0]</obj_property>
+      <obj_property name="ObjectShortName">trig_time_out[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/trigger_test/trig_amp_out" type="array">
+      <obj_property name="ElementShortName">trig_amp_out[1:0]</obj_property>
+      <obj_property name="ObjectShortName">trig_amp_out[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/trigger_test/CH_time" type="array">
+      <obj_property name="ElementShortName">CH_time[11:0]</obj_property>
+      <obj_property name="ObjectShortName">CH_time[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/trigger_test/CH_amp" type="array">
+      <obj_property name="ElementShortName">CH_amp[11:0]</obj_property>
+      <obj_property name="ObjectShortName">CH_amp[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/trigger_test/CHANNEL" type="array">
+      <obj_property name="ElementShortName">CHANNEL[31:0]</obj_property>
+      <obj_property name="ObjectShortName">CHANNEL[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/trigger_test/my_trigger/mt_cou" type="array">
+      <obj_property name="ElementShortName">mt_cou[2:0]</obj_property>
+      <obj_property name="ObjectShortName">mt_cou[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/trigger_test/my_trigger/CH_trigt" type="array">
+      <obj_property name="ElementShortName">CH_trigt[11:0]</obj_property>
+      <obj_property name="ObjectShortName">CH_trigt[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/trigger_test/my_trigger/CH_triga" type="array">
+      <obj_property name="ElementShortName">CH_triga[11:0]</obj_property>
+      <obj_property name="ObjectShortName">CH_triga[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/trigger_test/my_trigger/trigger_0/CH_ampl" type="array">
+      <obj_property name="ElementShortName">CH_ampl[0:11][9:0]</obj_property>
+      <obj_property name="ObjectShortName">CH_ampl[0:11][9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/trigger_test/my_trigger/trigger_0/CH_TIME1_T" type="array">
+      <obj_property name="ElementShortName">CH_TIME1_T[0:11][9:0]</obj_property>
+      <obj_property name="ObjectShortName">CH_TIME1_T[0:11][9:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/trigger_test/my_trigger/trigger_0/N_chans" type="array">
+      <obj_property name="ElementShortName">N_chans[3:0]</obj_property>
+      <obj_property name="ObjectShortName">N_chans[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/trigger_test/my_trigger/trigger_0/Trig_on0" type="logic">
+      <obj_property name="ElementShortName">Trig_on0</obj_property>
+      <obj_property name="ObjectShortName">Trig_on0</obj_property>
+   </wvobject>
+</wave_config>
