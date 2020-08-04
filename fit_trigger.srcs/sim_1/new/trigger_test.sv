@@ -36,7 +36,7 @@ module trigger_test(
     logic [2:0] state_counter;
     logic [1:0] trig_time_out;
     logic [1:0] trig_amp_out;
-    logic [CHANNEL-1:0]CH_time, CH_amp;
+    logic [CHANNEL-1:0]CH_time, CH_amp, CH_b;
     
     logic [1:0] tim_out[11:0];
     logic [1:0] amp_out[11:0];
@@ -44,15 +44,17 @@ module trigger_test(
 
     logic [1:0] tim_res[11:0];
     logic [1:0] amp_res[11:0];
+    
+    logic tcm_req;
 
     assign v_trig_time_ch = trig_time_ch;
     assign v_trig_amp_ch = trig_amp_ch;
     
     initial begin
         clk = 0;
-        state_counter = 0;
+        state_counter = -1;
         count = 0;
-        read_sample(CH_amp,CH_time,trig_amp_ch,trig_time_ch);
+        read_sample(CH_amp,CH_time,trig_amp_ch,trig_time_ch,CH_b,tcm_req);
         # 120; 
         read_results(tim_res,amp_res);
         write_to_file(tim_res,amp_res);
@@ -86,14 +88,17 @@ module trigger_test(
     .mt_cou(state_counter),
     .CH_trigt(CH_time), 
     .CH_triga(CH_amp), 
+    .CH_trigb(CH_b), 
     .CH_TIME_T(trig_time_ch),
     .CH_ampl0(trig_amp_ch),
+    .tcm_req(tcm_req),
     .tt(trig_time_out),
     .ta(trig_amp_out)
     );
     
     
-    task read_sample(output logic [CHANNEL-1:0]CH_amp, output logic [CHANNEL-1:0]CH_time, output [CHANNEL-1:0][12:0]amp, output [CHANNEL-1:0][9:0]tim);
+    task read_sample(output logic [CHANNEL-1:0]CH_amp, output logic [CHANNEL-1:0]CH_time, output [CHANNEL-1:0][12:0]amp, output [CHANNEL-1:0][9:0]tim,
+                        output logic [CHANNEL-1:0]CH_b, output logic tcm_req);
         string line;
         integer code;
         int num[CHANNEL-1:0];
@@ -109,9 +114,12 @@ module trigger_test(
         
         foreach(num[i]) begin
             code = $fgets(line,fd);
-            $sscanf(line,"%d,%b,%b,%d,%d",num[i],CH_amp[i],CH_time[i],amp[i],tim[i]);
+            $sscanf(line,"%d,%b,%b,%h,%h,%h",num[i],CH_amp[i],CH_time[i],amp[i],tim[i],CH_b[i]);
             $display("%d", line);
         end 
+        tcm_req = 1;
+        
+        
 //        $fclose("sample.csv");  
     endtask :read_sample
     

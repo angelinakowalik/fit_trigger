@@ -13,14 +13,14 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="173709678fs"></ZoomEndTime>
-      <Cursor1Time time="120000000fs"></Cursor1Time>
+      <ZoomEndTime time="129795919fs"></ZoomEndTime>
+      <Cursor1Time time="85442000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="140"></NameColumnWidth>
-      <ValueColumnWidth column_width="88"></ValueColumnWidth>
+      <ValueColumnWidth column_width="76"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="16" />
+   <WVObjectSize size="23" />
    <wvobject fp_name="/trigger_test/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -85,5 +85,33 @@
    <wvobject fp_name="/trigger_test/my_trigger/trigger_0/Trig_on0" type="logic">
       <obj_property name="ElementShortName">Trig_on0</obj_property>
       <obj_property name="ObjectShortName">Trig_on0</obj_property>
+   </wvobject>
+   <wvobject fp_name="/trigger_test/my_trigger/trigger_0/TT_mode" type="logic">
+      <obj_property name="ElementShortName">TT_mode</obj_property>
+      <obj_property name="ObjectShortName">TT_mode</obj_property>
+   </wvobject>
+   <wvobject fp_name="/trigger_test/my_trigger/trigger_0/tts" type="array">
+      <obj_property name="ElementShortName">tts[5:0]</obj_property>
+      <obj_property name="ObjectShortName">tts[5:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/trigger_test/my_trigger/trigger_0/tas" type="array">
+      <obj_property name="ElementShortName">tas[5:0]</obj_property>
+      <obj_property name="ObjectShortName">tas[5:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/trigger_test/my_trigger/trigger_0/ta" type="array">
+      <obj_property name="ElementShortName">ta[1:0]</obj_property>
+      <obj_property name="ObjectShortName">ta[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/trigger_test/my_trigger/trigger_0/tt" type="array">
+      <obj_property name="ElementShortName">tt[1:0]</obj_property>
+      <obj_property name="ObjectShortName">tt[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/trigger_test/my_trigger/trigger_0/ta0s" type="array">
+      <obj_property name="ElementShortName">ta0s[6:0]</obj_property>
+      <obj_property name="ObjectShortName">ta0s[6:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/trigger_test/my_trigger/trigger_0/tas_c" type="array">
+      <obj_property name="ElementShortName">tas_c[3:0]</obj_property>
+      <obj_property name="ObjectShortName">tas_c[3:0]</obj_property>
    </wvobject>
 </wave_config>
